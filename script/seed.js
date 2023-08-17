@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const {db, models: {User, Question} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -15,6 +15,23 @@ async function seed() {
     User.create({ username: 'cody', password: '123' }),
     User.create({ username: 'murphy', password: '123' }),
   ])
+
+  const sampleQuestion = await Promise.all([Question.create({
+    text: 'What is the capital of France?',
+    options: ['Berlin', 'Madrid', 'Paris', 'Rome'],
+    correctAnswer: 'Paris',
+  }),
+  Question.create({
+    text: 'What is the tallest Bball player?',
+    options: ['Jordan', 'Bogues', 'Bol', 'Tatum'],
+    correctAnswer: 'Paris',
+  }),
+  Question.create({
+    text: 'Who won the most SuperBowls?',
+    options: ['Montana', 'Brady', 'Manning', 'Rodgers'],
+    correctAnswer: 'Brady',
+  }),
+]);
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
